@@ -86,19 +86,19 @@ class Levels(commands.Cog):
 			await ctx.send('***Пользователь не имеет никакого уровня.***')
 		else:
 			if self.users[member_id]['level'] >= 30:
-				role = discord.utils.get(member.guild.roles, name='Role lvl 4')
+				role = discord.utils.get(member.guild.roles, name='Бро')
 				await member.add_roles(role)
-				await ctx.send(f'{member}, достигший 30 уровня, получает роль Role lvl 4!')
+				await ctx.send(f'{member}, достигший 30 уровня, получает роль Бро!')
 			elif self.users[member_id]['level'] >= 20:
-				role = discord.utils.get(member.guild.roles, name='Role lvl 3')
+				role = discord.utils.get(member.guild.roles, name='Сотка в кармане')
 				await member.add_roles(role)
-				await ctx.send(f'{member}, достигший 20 уровня, получает роль Role lvl 3!')
+				await ctx.send(f'{member}, достигший 20 уровня, получает роль Сотка в кармане!')
 			elif self.users[member_id]['level'] >= 10:
-				role = discord.utils.get(member.guild.roles, name='Role lvl 2')
-				r_role = discord.utils.get(member.guild.roles, name='Start role')
+				role = discord.utils.get(member.guild.roles, name='Местный')
+				r_role = discord.utils.get(member.guild.roles, name='Куда сдавать бутылки?')
 				await member.add_roles(role)
 				await member.remove_roles(r_role)
-				await ctx.send(f'{member}, достигший 10 уровня, получает роль Role lvl 2!')
+				await ctx.send(f'{member}, достигший 10 уровня, получает роль Местный!')
 			elif self.users[member_id]['level'] < 10:
 				await ctx.send('***Повышайте уровень, чтобы получать роли!***')
 
@@ -174,39 +174,47 @@ class Levels(commands.Cog):
 	async def diceup(self, message, amount: int):
 		N = int(amount)
 		author_id = str(message.author.id)
-		roll = randint(0, 100)
+		if self.users[author_id]['money'] >= N:
+			
+			roll = randint(0, 100)
 
-		if roll > 50:
-			self.users[author_id]['money'] += N
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll == 50:
-			self.users[author_id]['money'] -= N*5
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll < 50:
-			self.users[author_id]['money'] -= N
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll == 0 or roll == 100:
-			self.users[author_id]['money'] += N*9
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			if roll > 50:
+				self.users[author_id]['money'] += N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll == 50:
+				self.users[author_id]['money'] -= N*5
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll < 50:
+				self.users[author_id]['money'] -= N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll == 0 or roll == 100:
+				self.users[author_id]['money'] += N*9
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+		else:
+			await message.channel.send(f"{message.author.mention}, у тебя недостаточно пивных крышек! ☉{self.users[author_id]['money']}☉")
 
 	@commands.command()
 	async def dicedown(self, message, amount: int):
 		N = int(amount)
 		author_id = str(message.author.id)
-		roll = randint(0, 100)
+		if self.users[author_id]['money'] >= N:
+			
+			roll = randint(0, 100)
 
-		if roll < 50:
-			self.users[author_id]['money'] += N
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll == 50:
-			self.users[author_id]['money'] -= N*5
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll > 50:
-			self.users[author_id]['money'] -= N
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-		elif roll == 0 or roll == 100:
-			self.users[author_id]['money'] += N*9
-			await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			if roll < 50:
+				self.users[author_id]['money'] += N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll == 50:
+				self.users[author_id]['money'] -= N*5
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll > 50:
+				self.users[author_id]['money'] -= N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll == 0 or roll == 100:
+				self.users[author_id]['money'] += N*9
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+		else:
+			await message.channel.send(f"{message.author.mention}, у тебя недостаточно пивных крышек! ☉{self.users[author_id]['money']}☉")
 
 	@commands.command()
 	@commands.has_permissions(ban_members=True)
