@@ -11,15 +11,14 @@ class Levels(commands.Cog):
 		self.bot = bot
 
 		self.bot.loop.create_task(self.save_users())
-		linux = '/home/maxlol98765/git/vasiliy/cogs/users.json'
-		with open(r'C:\Users\12\Desktop\BOT\cogs\users.json', 'r') as f:
+		with open(r'/home/adminroot/vasiliy_bot/cogs/users.json', 'r') as f:
 			self.users = json.load(f)
 
 	@commands.Cog.listener()
 	async def save_users(self):
 		await self.bot.wait_until_ready()
 		while not self.bot.is_closed():
-			with open(r'C:\Users\12\Desktop\BOT\cogs\users.json', 'w') as f:
+			with open(r'/home/adminroot/vasiliy_bot/cogs/users.json', 'w') as f:
 				json.dump(self.users, f, indent=4)
 
 			await asyncio.sleep(5)
@@ -58,6 +57,11 @@ class Levels(commands.Cog):
 
 		if self.lvl_up(author_id):
 			await message.channel.send(f"{message.author.mention} получил {self.users[author_id]['level']} уровень и {self.users[author_id]['level']*5} пивных крышек!")
+
+	@commands.command()
+	async def roll(self, ctx, member: discord.Member = None):
+		member = ctx.author if not member else member
+		await ctx.send(f'{member} роллит {randint(1, 100)}.')
 
 	@commands.command()
 	async def level(self, ctx, member: discord.Member = None):
@@ -102,6 +106,7 @@ class Levels(commands.Cog):
 			elif self.users[member_id]['level'] < 10:
 				await ctx.send('***Повышайте уровень, чтобы получать роли!***')
 
+	#Shop
 	@commands.command()
 	async def buy1(self, ctx, member: discord.Member = None):
 		member = ctx.author if not member else member
@@ -169,7 +174,7 @@ class Levels(commands.Cog):
 				await ctx.send('***Недостаточно средств***')
 
 
-
+	#Dice
 	@commands.command()
 	async def diceup(self, message, amount: int):
 		N = int(amount)
@@ -178,18 +183,18 @@ class Levels(commands.Cog):
 			
 			roll = randint(0, 100)
 
-			if roll > 50:
-				self.users[author_id]['money'] += N
-				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			if roll == 0 or roll == 100:
+				self.users[author_id]['money'] += N*9
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 			elif roll == 50:
 				self.users[author_id]['money'] -= N*5
 				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 			elif roll < 50:
 				self.users[author_id]['money'] -= N
 				await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-			elif roll == 0 or roll == 100:
-				self.users[author_id]['money'] += N*9
-				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll > 50:
+				self.users[author_id]['money'] += N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 		else:
 			await message.channel.send(f"{message.author.mention}, у тебя недостаточно пивных крышек! ☉{self.users[author_id]['money']}☉")
 
@@ -201,51 +206,21 @@ class Levels(commands.Cog):
 			
 			roll = randint(0, 100)
 
-			if roll < 50:
-				self.users[author_id]['money'] += N
-				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			if roll == 0 or roll == 100:
+				self.users[author_id]['money'] += N*9
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 			elif roll == 50:
 				self.users[author_id]['money'] -= N*5
 				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил штраф в {N*5} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 			elif roll > 50:
 				self.users[author_id]['money'] -= N
 				await message.channel.send(f"❖{roll}❖ {message.author.mention} проиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
-			elif roll == 0 or roll == 100:
-				self.users[author_id]['money'] += N*9
-				await message.channel.send(f"❖{roll}❖ {message.author.mention} получил отобый приз в {N*9} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
+			elif roll < 50:
+				self.users[author_id]['money'] += N
+				await message.channel.send(f"❖{roll}❖ {message.author.mention} выиграл в Dice {N} пивные(-ых) крышки(-ек)! ☉{self.users[author_id]['money']}☉")
 		else:
 			await message.channel.send(f"{message.author.mention}, у тебя недостаточно пивных крышек! ☉{self.users[author_id]['money']}☉")
-
-	@commands.command()
-	@commands.has_permissions(ban_members=True)
-	async def addmoney(self, ctx, member: discord.Member = None):
-		member = ctx.author if not member else member
-		member_id = str(member.id)
-		money = 100
-
-		self.users[member_id]['money'] += money
-		await ctx.send(f'{member} получил {money} пивных крышек!')
-
-	@commands.command()
-	@commands.has_permissions(ban_members=True)
-	async def addlvl(self, ctx, member: discord.Member = None):
-		member = ctx.author if not member else member
-		member_id = str(member.id)
-		lvl = 1
-
-		self.users[member_id]['level'] += lvl
-		await ctx.send(f"{member} получил {self.users[member_id]['level']} уровень!")
-
-	@commands.command()
-	@commands.has_permissions(ban_members=True)
-	async def addexp(self, ctx, member: discord.Member = None):
-		member = ctx.author if not member else member
-		member_id = str(member.id)
-		exp = 10
-
-		self.users[member_id]['exp'] += exp
-		await ctx.send(f'{member} получил {exp} опыта!')
-
+	
 
 	@commands.Cog.listener()
 	@diceup.error
@@ -307,9 +282,76 @@ class Levels(commands.Cog):
 		if isinstance(error,commands.BadFrgument):
 			await ctx.send('***Неверно введена команда (!buy[index] при покупке себе, member писать не надо)!***')
 			
+	#Admin commands
+	@commands.command()
+	@commands.has_permissions(ban_members=True)
+	async def addmoney(self, ctx, amount: int, member: discord.Member = None):
+		member = ctx.author if not member else member
+		member_id = str(member.id)
+		money = amount
 
+		self.users[member_id]['money'] += money
+		await ctx.send(f'{member} получил {money} пивных крышек!')
 
+	@commands.command()
+	@commands.has_permissions(ban_members=True)
+	async def addlvl(self, ctx, amount: int, member: discord.Member = None):
+		member = ctx.author if not member else member
+		member_id = str(member.id)
+		lvl = amount
 
+		self.users[member_id]['level'] += lvl
+		await ctx.send(f"{member} получил {self.users[member_id]['level']} уровень!")
+
+	@commands.command()
+	@commands.has_permissions(ban_members=True)
+	async def addexp(self, ctx, amount: int, member: discord.Member = None):
+		member = ctx.author if not member else member
+		member_id = str(member.id)
+		exp = amount
+
+		self.users[member_id]['exp'] += exp
+		await ctx.send(f'{member} получил {exp} опыта!')
+
+	@commands.command()
+	@commands.has_permissions(ban_members=True)
+	async def paexp(self, ctx, amount: int, member: discord.Member = None):
+		member = ctx.author if not member else member
+		member_id = str(member.id)
+		exp = amount
+
+		self.users[member_id]['exp'] -= exp
+		await ctx.send(f'{member} потерял {exp} опыта!')
+
+	@commands.Cog.listener()
+	@addmoney.error
+	async def addmoney_error(self, ctx, error):
+		if isinstance(error, commands.CheckFailure):
+			await ctx.send('***Вы не имеете права это использовать!***')
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.send('***Неверно введена команда (!addmoney сумма @nick#0000***')
+		if isinstance(error,commands.BadFrgument):
+			await ctx.send('***Неверно введена команда (!addmoney сумма @nick#0000***')
+
+	@commands.Cog.listener()
+	@addexp.error
+	async def addexp_error(self, ctx, error):
+		if isinstance(error, commands.CheckFailure):
+			await ctx.send('***Вы не имеете права это использовать!***')
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.send('***Неверно введена команда (!addexp сумма @nick#0000***')
+		if isinstance(error,commands.BadFrgument):
+			await ctx.send('***Неверно введена команда (!addexp сумма @nick#0000***')
+
+	@commands.Cog.listener()
+	@addlvl.error
+	async def addlvl_error(self, ctx, error):
+		if isinstance(error, commands.CheckFailure):
+			await ctx.send('***Вы не имеете права это использовать!***')
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.send('***Неверно введена команда (!addlvl сумма @nick#0000***')
+		if isinstance(error,commands.BadFrgument):
+			await ctx.send('***Неверно введена команда (!addlvl сумма @nick#0000***')
 
 
 def setup(bot):

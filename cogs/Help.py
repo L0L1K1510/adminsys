@@ -7,11 +7,11 @@ class Help(commands.Cog):
 
 	@commands.command()
 	async def help(self, ctx):
-		embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='https://discordapp.com/api/oauth2/authorize?client_id=599168929222361088&permissions=8&scope=bot')
+		embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='http://b92103ya.beget.tech/')
 
 		embed.set_author(name='Список команд', icon_url=ctx.author.avatar_url)
 
-		embed.add_field(name='Пользовательские', value='help, userinfo, roleinfo, diceinfo, giverole, diceup, dicedown, level, echo(say)')
+		embed.add_field(name='Пользовательские', value='help, userinfo, roleinfo, diceinfo, giverole, diceup, dicedown, level, echo(say), roll, shop, buy(1,2,3,4), youtube, donate')
 		embed.add_field(name='Модераторские', value='kick, clear, reload')
 		embed.add_field(name='Администраторские', value='ban, addmoney, addexp, addlvl')
 
@@ -23,9 +23,9 @@ class Help(commands.Cog):
 
 		embed.set_author(name='Список ролей', icon_url=ctx.author.avatar_url)
 
-		embed.add_field(name='Role lvl 2', value='может быть получена на 10 уровне, лишает роли Start role.', inline=False)
-		embed.add_field(name='Role lvl 3', value='может быть получена на 20 уровне, позволяет создавать и удалять каналы.', inline=False)
-		embed.add_field(name='Role lvl 4', value='может быть получена на 30 уровне, роль делает участника полноценным модератором.', inline=False)
+		embed.add_field(name='Местный', value='может быть получена на 10 уровне, лишает роли "Куда сдавать бутылки?".', inline=False)
+		embed.add_field(name='Сотка в кармане', value='может быть получена на 20 уровне, позволяет создавать и удалять каналы.', inline=False)
+		embed.add_field(name='Бро', value='может быть получена на 30 уровне, роль делает участника полноценным модератором.', inline=False)
 		embed.add_field(name='Внимание', value='запрещается флудить, с целью повышения уровня.', inline=False)
 
 		await ctx.send(embed=embed)
@@ -40,6 +40,30 @@ class Help(commands.Cog):
 		embed.add_field(name='!dicedown N', value='Используя данную команду, вы ставите N своих крышек на то, что случайно выбраное ботом число будет ***меньше*** 50. Если вы угадываете, то получаете на свой счёт в 2 раза больше, чем поставили. В противном случае, вы теряете N крышек.', inline=False)
 		embed.add_field(name='Штраф', value='Если выпадает число 50, вы получаете штраф N в пятикратном размере.', inline=False)
 		embed.add_field(name='Особый выигрыш', value='Если выпадает число 0 или 100, вы получаете N в десятикратном размере.', inline=False)
+
+		await ctx.send(embed=embed)
+
+	@commands.command()
+	async def userinfo(self, ctx, member: discord.Member = None):
+		member = ctx.author if not member else member
+		roles = [role for role in member.roles]
+
+		embed = discord.Embed(colour=member.color, timestamp=ctx.message.created_at)
+
+		embed.set_author(name=f'Информация о пользователе - {member}')
+		embed.set_thumbnail(url=member.avatar_url)
+		embed.set_footer(text=f'Запросил информацию - {ctx.author}', icon_url=ctx.author.avatar_url)
+
+		embed.add_field(name='ID:', value=member.id)
+		embed.add_field(name='Ник:', value=member.display_name)
+
+		embed.add_field(name='Создал аккаунт:', value=member.created_at.strftime('%d.%m.%Y'))
+		embed.add_field(name='Присоединился:', value=member.joined_at.strftime('%d.%m.%Y'))
+
+		embed.add_field(name=f'Роли ({len(roles)})', value=' '.join([role.mention for role in roles]))
+		embed.add_field(name='Наилучшая роль:', value=member.top_role.mention)
+
+		embed.add_field(name='Bot?', value=member.bot)
 
 		await ctx.send(embed=embed)
 
@@ -61,13 +85,10 @@ class Help(commands.Cog):
 	async def donate(self, ctx):
 		embed = discord.Embed(color=discord.Color.green())
 
-		embed.set_author(name='Магазин ролей', icon_url=ctx.author.avatar_url)
+		embed.set_author(name='Материальная поддержка', icon_url=ctx.author.avatar_url)
 
-		embed.add_field(name='100 крышек', value='10 рублей')
-		embed.add_field(name='10 опыта', value='5 рублей')
-		embed.add_field(name='1 уровень', value='20 рублей')
-		embed.add_field(name='Роль модератора', value='Отсосать у админа')
-		embed.add_field(name='Обращаться', value='L0L1K#9280.')
+		embed.add_field(name='QIWI/Сбербанк', value='+79512956537')
+		embed.add_field(name='Создатель', value='L0L1K#9280.')
 
 		await ctx.send(embed=embed)
 

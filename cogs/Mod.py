@@ -1,7 +1,12 @@
 import discord
 from discord.ext import commands
 
-class Mod (commands.Cog):
+from random import randint
+
+import json
+import asyncio
+
+class Mod(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
@@ -23,6 +28,19 @@ class Mod (commands.Cog):
 		await ctx.channel.purge(limit=amount + 1)
 		await ctx.send(f'{amount} сообщений было удалено.')
 
+	@commands.command()
+	@commands.has_permissions(kick_members=True)
+	@commands.is_owner()
+	async def reload(ctx, cog):
+		try:
+			bot.unload_extension(f"cogs.{cog}")
+			bot.load_extension(f"cogs.{cog}")
+			await ctx.send(f"{cog} перезагружен.")
+		except Exception as e:
+			print(f"{cog} не может быть запущен:")
+			raise e
+
+
 	@commands.Cog.listener()
 	@clear.error
 	async def clear_error(self, ctx, error):
@@ -37,7 +55,7 @@ class Mod (commands.Cog):
 	@kick.error
 	async def kick_error(self, ctx, error):
 		if isinstance(error, commands.CheckFailure):
-			await ctx.send('***Неверно введена команда (!kick @nick#0000 reason)!***')
+			await ctx.send('***Вы не имеете права это использовать!***')
 		if isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send('***Неверно введена команда (!kick @nick#0000 reason)!***')
 		if isinstance(error,commands.BadFrgument):
@@ -47,7 +65,7 @@ class Mod (commands.Cog):
 	@ban.error
 	async def ban_error(self, ctx, error):
 		if isinstance(error, commands.CheckFailure):
-			await ctx.send('***Неверно введена команда (!ban @nick#0000 reason)!***')
+			await ctx.send('***Вы не имеете права это использовать!***')
 		if isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send('***Неверно введена команда (!ban @nick#0000 reason)!***')
 		if isinstance(error,commands.BadFrgument):
