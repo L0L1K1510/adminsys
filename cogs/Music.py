@@ -17,14 +17,14 @@ class Music(commands.Cog):
 	    voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 	    if voice and voice.is_connected():
-		await voice.move_to(channel)
+			await voice.move_to(channel)
 	    else:
 		voice = await channel.connect()
 
 	    await voice.disconnect()
 
 	    if voice and voice.is_connected():
-		await voice.move_to(channel)
+			await voice.move_to(channel)
 	    else:
 		voice = await channel.connect()
 		print(f"The bot has connected to {channel}\n")
@@ -64,27 +64,27 @@ class Music(commands.Cog):
 		    main_location = os.path.dirname(os.path.realpath(__file__))
 		    song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
 		    if length != 0:
-			print("Song done, playing next queued\n")
-			print(f"Songs still in queue: {still_q}")
-			song_there = os.path.isfile("song.mp3")
-			if song_there:
-			    os.remove("song.mp3")
-			shutil.move(song_path, main_location)
-			for file in os.listdir("./"):
-			    if file.endswith(".mp3"):
-				os.rename(file, 'song.mp3')
+				print("Song done, playing next queued\n")
+				print(f"Songs still in queue: {still_q}")
+				song_there = os.path.isfile("song.mp3")
+				if song_there:
+					os.remove("song.mp3")
+				shutil.move(song_path, main_location)
+				for file in os.listdir("./"):
+					if file.endswith(".mp3"):
+						os.rename(file, 'song.mp3')
 
-			voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
-			voice.source = discord.PCMVolumeTransformer(voice.source)
-			voice.source.volume = 0.07
+				voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
+				voice.source = discord.PCMVolumeTransformer(voice.source)
+				voice.source.volume = 0.07
 
 		    else:
 			queues.clear()
 			return
 
 		else:
-		    queues.clear()
-		    print("No songs were queued before the ending of the last song\n")
+			queues.clear()
+			print("No songs were queued before the ending of the last song\n")
 
 
 
