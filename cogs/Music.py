@@ -11,25 +11,25 @@ class Music(commands.Cog):
 		self.bot = bot
 
 	@commands.command(pass_context=True, aliases=['j', 'joi'])
-    async def join(self, ctx):
-        global voice
-        channel = ctx.message.author.voice.channel
-        voice = get(self.bot.voice_clients, guild=ctx.guild)
+	async def join(self, ctx):
+		global voice
+		channel = ctx.message.author.voice.channel
+		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
-        if voice and voice.is_connected():
-            await voice.move_to(channel)
-        else:
-            voice = await channel.connect()
+		if voice and voice.is_connected():
+		    await voice.move_to(channel)
+		else:
+		    voice = await channel.connect()
 
-        await voice.disconnect()
+		await voice.disconnect()
 
-        if voice and voice.is_connected():
-            await voice.move_to(channel)
-        else:
-            voice = await channel.connect()
-            print(f"The bot has connected to {channel}\n")
+		if voice and voice.is_connected():
+		    await voice.move_to(channel)
+		else:
+		    voice = await channel.connect()
+		    print(f"The bot has connected to {channel}\n")
 
-        await ctx.send(f"Joined {channel}")
+		await ctx.send(f"Joined {channel}")
 
 
     @commands.command(pass_context=True, aliases=['l', 'lea'])
