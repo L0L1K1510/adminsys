@@ -56,7 +56,7 @@ class Music(commands.Cog):
 		except PermissionError:
 			print('[Music] Файл не найдён')
 			
-		await ctx.send('Песня загружается...')
+		#await ctx.send('Песня загружается...')
 		
 		voice = get(self.bot.voice_clients, guild = ctx.guild)
 		
