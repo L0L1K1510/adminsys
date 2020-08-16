@@ -113,7 +113,7 @@ class Music(commands.Cog):
 
 		await ctx.send("Getting everything ready now")
 
-		voice = get(bot.voice_clients, guild=ctx.guild)
+		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 		ydl_opts = {
 			'format': 'bestaudio/best',
