@@ -26,7 +26,7 @@ class Music(commands.Cog):
 		if voice and voice.is_connected():
 			await voice.move_to(channel)
 		else:
-		voice = await channel.connect()
+			voice = await channel.connect()
 			print(f"The bot has connected to {channel}\n")
 
 		await ctx.send(f"Joined {channel}")
