@@ -58,7 +58,7 @@ class Music(commands.Cog):
 			
 		#await ctx.send('Песня загружается...')
 		
-		voice = get(self.bot.voice_clients, guild = ctx.guild)
+		voice = get(bot.voice_clients, guild = ctx.guild)
 		
 		ydl_opts = {
 			'format' : 'bestaudio/best',
