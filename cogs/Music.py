@@ -10,7 +10,8 @@ class Music(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		
-	global queues = {}
+	queues = {}
+	global queues
 
 	@commands.command(pass_context=True, aliases=['j', 'joi'])
 	async def join(self, ctx):
