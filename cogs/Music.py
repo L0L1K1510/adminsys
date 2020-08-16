@@ -9,6 +9,8 @@ import asyncio
 class Music(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
+		
+	queues = {}
 
 	@commands.command(pass_context=True, aliases=['j', 'joi'])
 	async def join(self, ctx):
@@ -192,8 +194,6 @@ class Music(commands.Cog):
 			print("No music playing failed to stop")
 			await ctx.send("No music playing failed to stop")
 
-
-	queues = {}
 
 	@commands.command(pass_context=True, aliases=['q', 'que'])
 	async def queue(self, ctx, url: str):
