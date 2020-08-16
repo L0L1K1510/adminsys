@@ -204,7 +204,7 @@ class Music(commands.Cog):
 		q_num += 1
 		add_queue = True
 		while add_queue:
-			if q_num in queues:
+			if q_num in self.queues:
 				q_num += 1
 			else:
 				add_queue = False
