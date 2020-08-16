@@ -46,7 +46,7 @@ class Music(commands.Cog):
 
 
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
-	async def play(ctx, url : str):
+	async def play(self, ctx, url : str):
 		song_there = os.path.isfile('song.mp3')
 		
 		try:
