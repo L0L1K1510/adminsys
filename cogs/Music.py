@@ -11,7 +11,6 @@ class Music(commands.Cog):
 		self.bot = bot
 		
 	queues = {}
-	global queues
 
 	@commands.command(pass_context=True, aliases=['j', 'joi'])
 	async def join(self, ctx):
@@ -52,7 +51,7 @@ class Music(commands.Cog):
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
 	async def play(self, ctx, url: str):
 
-		def check_queue():
+		def check_queue(queues):
 			Queue_infile = os.path.isdir("./Queue")
 			if Queue_infile is True:
 				DIR = os.path.abspath(os.path.realpath("Queue"))
@@ -83,7 +82,7 @@ class Music(commands.Cog):
 
 				else:
 					queues.clear()
-					return
+					return queues
 
 			else:
 				queues.clear()
