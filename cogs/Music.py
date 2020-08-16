@@ -61,7 +61,7 @@ class Music(commands.Cog):
 		voice = get(self.bot.voice_clients, guild = ctx.guild)
 		
 		ydl_opts = {
-			'format' : 'bestaudio/best'
+			'format' : 'bestaudio/best',
 			'postprocessors' : [{
 				'key' : 'FFmpegExtractAudio',
 				'preferredcodec' : 'mp3',
