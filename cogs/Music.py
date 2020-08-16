@@ -51,7 +51,7 @@ class Music(commands.Cog):
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
 	async def play(self, ctx, url: str):
 
-		def check_queue(queues):
+		def check_queue():
 			Queue_infile = os.path.isdir("./Queue")
 			if Queue_infile is True:
 				DIR = os.path.abspath(os.path.realpath("Queue"))
