@@ -41,11 +41,11 @@ class Music(commands.Cog):
 
 		if voice and voice.is_connected():
 			await voice.disconnect()
-			print(f"The bot has left {channel}")
-			await ctx.send(f"Left {channel}")
+			print(f"Бот выключен {channel}")
+			await ctx.send(f"Выключение {channel}")
 		else:
-			print("Bot was told to leave voice channel, but was not in one")
-			await ctx.send("Don't think I am in a voice channel")
+			print("Боту было сказано покинуть канал, но он не был в нём")
+			await ctx.send("Не думаю что я нахожусь в голосовом канале")
 
 
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
@@ -60,14 +60,14 @@ class Music(commands.Cog):
 				try:
 					first_file = os.listdir(DIR)[0]
 				except:
-					print("No more queued song(s)\n")
+					print("Больше нет песен в очереди\n")
 					queues.clear()
 					return
 				main_location = os.path.dirname(os.path.realpath(__file__))
 				song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
 				if length != 0:
-					print("Song done, playing next queued\n")
-					print(f"Songs still in queue: {still_q}")
+					print("Песня закончена, проигрываю следующую в очереди\n")
+					print(f"Песен в очереди: {still_q}")
 					song_there = os.path.isfile("song.mp3")
 					if song_there:
 						os.remove("song.mp3")
@@ -86,7 +86,7 @@ class Music(commands.Cog):
 
 			else:
 				queues.clear()
-				print("No songs were queued before the ending of the last song\n")
+				print("Ни одной песни не было в очереди к концу предыдущей\n")
 
 
 
@@ -95,10 +95,10 @@ class Music(commands.Cog):
 			if song_there:
 				os.remove("song.mp3")
 				queues.clear()
-				print("Removed old song file")
+				print("Удаляем старый файл")
 		except PermissionError:
-			print("Trying to delete song file, but it's being played")
-			await ctx.send("ERROR: Music playing")
+			print("Попытка удалить файл песни, которая проигрывается в данный момент")
+			await ctx.send("Ошибка: песня проигрывается")
 			return
 
 
@@ -106,12 +106,12 @@ class Music(commands.Cog):
 		try:
 			Queue_folder = "./Queue"
 			if Queue_infile is True:
-				print("Removed old Queue Folder")
+				print("Старая очередь удалена")
 				shutil.rmtree(Queue_folder)
 		except:
-			print("No old Queue folder")
+			print("Нет старых очередей")
 
-		await ctx.send("Getting everything ready now")
+		await ctx.send("Идёт подготовка")
 
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
@@ -126,17 +126,17 @@ class Music(commands.Cog):
 		}
 		try:
 			with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-				print("Downloading audio now\n")
+				print("Музыка загружается...\n")
 				ydl.download([url])
 		except:
-			print("FALLBACK: youtube-dl does not support this URL, using Spotify (This is normal if Spotify URL)")
+			print("Этой URL нет на Ютубе, ищем на Spotify...")
 			c_path = os.path.dirname(os.path.realpath(__file__))
 			system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
 
 		for file in os.listdir("./"):
 			if file.endswith(".mp3"):
 				name = file
-				print(f"Renamed File: {file}\n")
+				print(f"Переименован файл: {file}\n")
 				os.rename(file, "song.mp3")
 
 		voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
@@ -144,8 +144,8 @@ class Music(commands.Cog):
 		voice.source.volume = 0.07
 
 		nname = name.rsplit("-", 2)
-		await ctx.send(f"Playing: {nname[0]}")
-		print("playing\n")
+		await ctx.send(f"Проигрывается: {nname[0]}")
+		print("Проигрывается\n")
 
 
 	@commands.command(pass_context=True, aliases=['pa', 'pau'])
@@ -154,12 +154,12 @@ class Music(commands.Cog):
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 		if voice and voice.is_playing():
-			print("Music paused")
+			print("Проигрывание приостановлено")
 			voice.pause()
-			await ctx.send("Music paused")
+			await ctx.send("Проигрывание приостановлено")
 		else:
-			print("Music not playing failed pause")
-			await ctx.send("Music not playing failed pause")
+			print("Пауза невозможна, т.к. музыка не проигрывается")
+			await ctx.send("Пауза невозможна, т.к. музыка не проигрывается")
 
 
 	@commands.command(pass_context=True, aliases=['r', 'res'])
@@ -168,12 +168,12 @@ class Music(commands.Cog):
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 		if voice and voice.is_paused():
-			print("Resumed music")
+			print("Проигрывание возобновляется")
 			voice.resume()
-			await ctx.send("Resumed music")
+			await ctx.send("Проигрывание возобновляется")
 		else:
-			print("Music is not paused")
-			await ctx.send("Music is not paused")
+			print("Музыка не на паузе")
+			await ctx.send("Музыка не на паузе")
 
 
 	@commands.command(pass_context=True, aliases=['s', 'sto'])
@@ -187,12 +187,12 @@ class Music(commands.Cog):
 			shutil.rmtree("./Queue")
 
 		if voice and voice.is_playing():
-			print("Music stopped")
+			print("Проигрывание остановлено")
 			voice.stop()
-			await ctx.send("Music stopped")
+			await ctx.send("Проигрывание остановлено")
 		else:
-			print("No music playing failed to stop")
-			await ctx.send("No music playing failed to stop")
+			print("Остановка невозможна, т.к. музыка не проигрывается")
+			await ctx.send("Остановка невозможна, т.к. музыка не проигрывается")
 
 
 	@commands.command(pass_context=True, aliases=['q', 'que'])
@@ -225,17 +225,17 @@ class Music(commands.Cog):
 		}
 		try:
 			with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-				print("Downloading audio now\n")
+				print("Загружается аудио...\n")
 				ydl.download([url])
 		except:
-			print("FALLBACK: youtube-dl does not support this URL, using Spotify (This is normal if Spotify URL)")
+			print("Этот URL не был найден на Youtube, ищем на Spotify...")
 			q_path = os.path.abspath(os.path.realpath("Queue"))
 			system(f"spotdl -ff song{q_num} -f " + '"' + q_path + '"' + " -s " + url)
 
 
-		await ctx.send("Adding song " + str(q_num) + " to the queue")
+		await ctx.send("Добавляем " + str(q_num) + " в очередь")
 
-		print("Song added to queue\n")
+		print("Песня добавлена в очередь\n")
 
 
 	@commands.command(pass_context=True, aliases=['n', 'nex'])
@@ -243,12 +243,12 @@ class Music(commands.Cog):
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 		if voice and voice.is_playing():
-			print("Playing Next Song")
+			print("Следующая песня")
 			voice.stop()
-			await ctx.send("Next Song")
+			await ctx.send("Следующая песня")
 		else:
-			print("No music playing")
-			await ctx.send("No music playing failed")
+			print("Музыка не проигрывается в данный момент")
+			await ctx.send("Музыка не проигрывается в данный момент")
 
 
 	
