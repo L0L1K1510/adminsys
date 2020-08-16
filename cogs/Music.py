@@ -62,7 +62,7 @@ class Music(commands.Cog):
 		
 		ydl_opts = {
 			'format' : 'bestaudio/best'
-			'postprocessor' : [{
+			'postprocessors' : [{
 				'key' : 'FFmpegExtractAudio',
 				'preferredcodec' : 'mp3',
 				'preferredquality' : '192'
