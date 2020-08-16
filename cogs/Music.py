@@ -61,7 +61,7 @@ class Music(commands.Cog):
 					first_file = os.listdir(DIR)[0]
 				except:
 					print("Очередь пуста\n")
-					queues.clear()
+					self.queues.clear()
 					return
 				main_location = os.path.dirname(os.path.realpath(__file__))
 				song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
@@ -81,11 +81,11 @@ class Music(commands.Cog):
 					voice.source.volume = 0.07
 
 				else:
-					queues.clear()
+					self.queues.clear()
 					return
 
 			else:
-				queues.clear()
+				self.queues.clear()
 				print("Ни одной песни не было в очереди к концу предыдущей\n")
 
 
@@ -94,7 +94,7 @@ class Music(commands.Cog):
 		try:
 			if song_there:
 				os.remove("song.mp3")
-				queues.clear()
+				self.queues.clear()
 				print("Удаляем старый файл")
 		except PermissionError:
 			print("Попытка удалить файл песни, которая проигрывается в данный момент")
@@ -180,7 +180,7 @@ class Music(commands.Cog):
 	async def stop(self, ctx):
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
-		queues.clear()
+		self.queues.clear()
 
 		queue_infile = os.path.isdir("./Queue")
 		if queue_infile is True:
