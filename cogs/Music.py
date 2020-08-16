@@ -29,9 +29,9 @@ class Music(commands.Cog):
 			await voice.move_to(channel)
 		else:
 			voice = await channel.connect()
-			print(f"The bot has connected to {channel}\n")
+			print(f"Присоединяется к каналу {channel}\n")
 
-		await ctx.send(f"Joined {channel}")
+		await ctx.send(f"Присоединяется к каналу {channel}")
 
 
 	@commands.command(pass_context=True, aliases=['l', 'lea'])
@@ -41,11 +41,11 @@ class Music(commands.Cog):
 
 		if voice and voice.is_connected():
 			await voice.disconnect()
-			print(f"Бот выключен {channel}")
-			await ctx.send(f"Выключение {channel}")
+			print(f"Покидает канал {channel}")
+			await ctx.send(f"Покидает канал {channel}")
 		else:
 			print("Боту было сказано покинуть канал, но он не был в нём")
-			await ctx.send("Не думаю что я нахожусь в голосовом канале")
+			await ctx.send("Невозможно покинуть канал, в котором бот не находится")
 
 
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
@@ -60,13 +60,13 @@ class Music(commands.Cog):
 				try:
 					first_file = os.listdir(DIR)[0]
 				except:
-					print("Больше нет песен в очереди\n")
+					print("Очередь пуста\n")
 					queues.clear()
 					return
 				main_location = os.path.dirname(os.path.realpath(__file__))
 				song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
 				if length != 0:
-					print("Песня закончена, проигрываю следующую в очереди\n")
+					print("Песня закончена, проигрывается следующая в очереди\n")
 					print(f"Песен в очереди: {still_q}")
 					song_there = os.path.isfile("song.mp3")
 					if song_there:
@@ -98,7 +98,7 @@ class Music(commands.Cog):
 				print("Удаляем старый файл")
 		except PermissionError:
 			print("Попытка удалить файл песни, которая проигрывается в данный момент")
-			await ctx.send("Ошибка: песня проигрывается")
+			await ctx.send("Ошибка: песня проигрывается в данный момент")
 			return
 
 
@@ -144,7 +144,7 @@ class Music(commands.Cog):
 		voice.source.volume = 0.07
 
 		nname = name.rsplit("-", 2)
-		await ctx.send(f"Проигрывается: {nname[0]}")
+		await ctx.send(f"Сейчас проигрывается: {nname[0]}")
 		print("Проигрывается\n")
 
 
@@ -156,10 +156,10 @@ class Music(commands.Cog):
 		if voice and voice.is_playing():
 			print("Проигрывание приостановлено")
 			voice.pause()
-			await ctx.send("Проигрывание приостановлено")
+			await ctx.send("Пауза")
 		else:
 			print("Пауза невозможна, т.к. музыка не проигрывается")
-			await ctx.send("Пауза невозможна, т.к. музыка не проигрывается")
+			await ctx.send("Пауза невозможна, т.к. в данный момент музыка не проигрывается")
 
 
 	@commands.command(pass_context=True, aliases=['r', 'res'])
@@ -168,12 +168,12 @@ class Music(commands.Cog):
 		voice = get(self.bot.voice_clients, guild=ctx.guild)
 
 		if voice and voice.is_paused():
-			print("Проигрывание возобновляется")
+			print("Возобновление")
 			voice.resume()
-			await ctx.send("Проигрывание возобновляется")
+			await ctx.send("Возобновление")
 		else:
-			print("Музыка не на паузе")
-			await ctx.send("Музыка не на паузе")
+			print("Нечего возобновлять")
+			await ctx.send("Нечего возобновлять")
 
 
 	@commands.command(pass_context=True, aliases=['s', 'sto'])
@@ -233,7 +233,7 @@ class Music(commands.Cog):
 			system(f"spotdl -ff song{q_num} -f " + '"' + q_path + '"' + " -s " + url)
 
 
-		await ctx.send("Добавляем " + str(q_num) + " в очередь")
+		await ctx.send("Добавление " + str(q_num) + " в очередь")
 
 		print("Песня добавлена в очередь\n")
 
@@ -248,7 +248,7 @@ class Music(commands.Cog):
 			await ctx.send("Следующая песня")
 		else:
 			print("Музыка не проигрывается в данный момент")
-			await ctx.send("Музыка не проигрывается в данный момент")
+			await ctx.send("Ничего не проигрывается в данный момент")
 
 
 	
