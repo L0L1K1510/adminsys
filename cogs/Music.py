@@ -46,12 +46,47 @@ class Music(commands.Cog):
 
 
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
-	async def play(ctx, url):
-		server = ctx.message.server
-		voice_client = client.voice_client_in(server)
-		player = await voice_client.create_ytdl_player(url)
-		players[server.id] = player
-		player.start()
+	async def play(ctx, url : str):
+		song_there = os.path.isfile('song.mp3')
+		
+		try:
+			if song_there:
+				os.remove('song.mp3')
+				print('[Music] Старый файл удалён')
+		except PermissionError:
+			print('[Music] Файл не найдён')
+			
+		await ctx.send('Песня загружается...')
+		
+		voice = get(self.bot.voice_clients, guild = ctx.guild)
+		
+		ydl_opts = {
+			'format' : 'bestaudio/best'
+			'postprocessor' : [{
+				'key' : 'FFmpegExctractAudio',
+				'preferredcodec' : 'mp3',
+				'preferredquality' : '192'
+			}],
+		}
+		
+		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+			print('[Music] Загрузка...')
+			ydl.download([url])
+			
+		for file in os.listdir('./'):
+			if file.endswith('.mp3'):
+				name = file
+				print(f'[Music] Переименование файла: {file}')
+				os.rename(file, 'song.mp3')
+				
+		voice.play(discord.FFmpegPCMAudio('song.mp3'), after = lambda e: print(f'[Music] {name}, музыка закончила проигрывание'))
+		voice.source = discord.PCMVolumeTransformer(voice.source)
+		voice.source.volume = 0.05
+		
+		song_name = name.rsplit('-', 2)
+		await ctx.send(f'Сейчас играет: {song_name[0]}')
+		
+		
 
 
 	
