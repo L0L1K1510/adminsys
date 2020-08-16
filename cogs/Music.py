@@ -82,7 +82,7 @@ class Music(commands.Cog):
 
 				else:
 					queues.clear()
-					return queues
+					return
 
 			else:
 				queues.clear()
