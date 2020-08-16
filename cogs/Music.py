@@ -47,12 +47,12 @@ class Music(commands.Cog):
 
 	@commands.command(pass_context=True, aliases=['p', 'pla'])
 	async def play(ctx, url):
-        await ctx.send("Песня загружается...")
         server = ctx.message.server
         voice_client = client.voice_client_in(server)
         player = await voice_client.create_ytdl_player(url)
         players[server.id] = player
         player.start()
+        await ctx.send("Песня загружается...")
 
 
 	
