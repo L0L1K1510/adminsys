@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+import urllib.parse, urllib.request, re
+
 import logging
 import random
 import datetime
