@@ -28,12 +28,13 @@ async def on_ready():
 	
 @bot.command()
 async def init(ctx):
-	await create_role(name='Новичок', reason=None)
-	await create_role(name='Местный', reason=None)
-	await create_role(name='Бывалый', reason=None)
-	await create_role(name='Постоялец', reason=None)
-	await create_text_channel(name='music', overwrites=None, reason=None)
-	await create_text_channel(name='dice', overwrites=None, reason=None)
+	await ctx.guild.create_role(name='Новичок', reason=None)
+	await ctx.guild.create_role(name='Местный', reason=None)
+	await ctx.guild.create_role(name='Бывалый', reason=None)
+	await ctx.guild.create_role(name='Постоялец', reason=None)
+	await ctx.guild.create_text_channel(name='music', overwrites=None, reason=None)
+	await ctx.guild.create_text_channel(name='dice', overwrites=None, reason=None)
+	await ctx.send('Бот инициализирован!')
 
 #AutoRole
 @bot.event
