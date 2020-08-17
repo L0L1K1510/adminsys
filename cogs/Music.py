@@ -62,7 +62,7 @@ class Music(commands.Cog):
 					print("Очередь пуста\n")
 					self.queues.clear()
 					return
-				main_location = os.path.dirname(os.path.realpath(__file__))
+				main_location = os.path.dirname("../" + os.path.realpath(__file__))
 				song_path = os.path.abspath(os.path.realpath("Queue") + "/" + first_file)
 				if length != 0:
 					print("Песня закончена, проигрывается следующая в очереди\n")
@@ -73,7 +73,7 @@ class Music(commands.Cog):
 					filename = os.path.basename(song_path)
 					dest = os.path.join(main_location,filename)
 					shutil.move(song_path, dest)
-					main_dir_list = os.listdir("./cogs")
+					main_dir_list = os.listdir("./")
 					print(main_dir_list)
 					for file in os.listdir("./"):
 						if file.endswith(".mp3"):
