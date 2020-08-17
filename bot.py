@@ -34,7 +34,7 @@ async def init(ctx):
 	await ctx.guild.create_role(name='Постоялец', reason=None)
 	await ctx.guild.create_text_channel(name='music', overwrites=None, reason=None)
 	await ctx.guild.create_text_channel(name='dice', overwrites=None, reason=None)
-	await ctx.send('Бот инициализирован!')
+	await ctx.send(':bulb: Бот инициализирован!')
 
 #AutoRole
 @bot.event
