@@ -32,8 +32,8 @@ Linux:
 > * FFmpeg <https://ffmpeg.org>
 ---
 
-_Следить за разработкой:_ <https://vk.com/dsbotdevelop>
-_Связь с автором ВК:_ <https://vk.com/perrk>
-_Связь с автором Discord:_ L0L1K#9280
+> _Следить за разработкой:_ <https://vk.com/dsbotdevelop>
+> _Связь с автором ВК:_ <https://vk.com/perrk>
+> _Связь с автором Discord:_ L0L1K#9280
 
 _Предлагайте свои решения!_
