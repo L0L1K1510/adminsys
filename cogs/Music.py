@@ -208,7 +208,7 @@ class Music(commands.Cog):
 				q_num += 1
 			else:
 				add_queue = False
-				queues[q_num] = q_num
+				self.queues[q_num] = q_num
 
 		queue_path = os.path.abspath(os.path.realpath("Queue") + f"\song{q_num}.%(ext)s")
 
