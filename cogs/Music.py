@@ -73,7 +73,7 @@ class Music(commands.Cog):
 					filename = os.path.basename(song_path)
 					dest = os.path.join(main_location,filename)
 					shutil.move(song_path, dest)
-					main_dir_list = os.listdir("./")
+					main_dir_list = os.listdir("./cogs")
 					print(main_dir_list)
 					for file in os.listdir("./"):
 						if file.endswith(".mp3"):
@@ -136,7 +136,7 @@ class Music(commands.Cog):
 			c_path = os.path.dirname(os.path.realpath(__file__))
 			system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
 
-		for file in os.listdir("./"):
+		for file in os.listdir("./cogs"):
 			if file.endswith(".mp3"):
 				name = file
 				print(f"Переименован файл: {file}\n")
