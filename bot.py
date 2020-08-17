@@ -20,6 +20,8 @@ bot = commands.Bot(command_prefix='!')
 bot.remove_command('help')
 TOKEN = open('TOKEN.txt', 'r').read()
 
+bad_words = ['сука', 'ска', 'бля', 'блять', 'пидор', 'пидар', 'пидр', 'ебал', 'ебать', 'ебу', 'ебёшь', 'ебаный', 'уебан', 'уёбок', 'уёбище', 'уебанский', 'ебанутый', 'еб', 'ёб', 'хуй', 'хуйня', 'хуйло', 'хуило', 'блядь', 'пиздец', 'идинахуй', 'пизда', 'гандон']
+
 @bot.event
 async def on_ready():
 	print('Bot online...')
@@ -41,6 +43,19 @@ async def init(ctx):
 async def on_member_join(member):
 	role = discord.utils.get(member.guild.roles, name='Новичёк')
 	await member.add_roles(role)
+	
+#Antimat
+@bot.event
+async def on_message(message):
+	if message.author == bot.user:
+		return
+	else:
+		content = message.content.split()
+		for word in content:
+			if word in bad_words:
+				await message.delete()
+				await message.channel.send('***Цензура***')
+	await bot.process.commands(message)
 
 
 @bot.command(aliases=['say'])
