@@ -25,11 +25,20 @@ async def on_ready():
 	print('Bot online...')
 	print(bot.user.name)
 	print('--------------')
+	
+@bot.command()
+async def init(ctx):
+	await create_role(name='Новичок', reason=None)
+	await create_role(name='Местный', reason=None)
+	await create_role(name='Бывалый', reason=None)
+	await create_role(name='Постоялец', reason=None)
+	await create_text_channel(name='music', overwrites=None, reason=None)
+	await create_text_channel(name='dice', overwrites=None, reason=None)
 
 #AutoRole
 @bot.event
 async def on_member_join(member):
-	role = discord.utils.get(member.guild.roles, name='Куда сдавать бутылки?')
+	role = discord.utils.get(member.guild.roles, name='Новичёк')
 	await member.add_roles(role)
 
 
