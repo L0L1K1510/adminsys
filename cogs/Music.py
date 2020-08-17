@@ -137,7 +137,7 @@ class Music(commands.Cog):
 				print(f"Переименован файл: {file}\n")
 				os.rename(file, "song.mp3")
 
-		voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('Песня закончилась'))
+		voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
 		voice.source = discord.PCMVolumeTransformer(voice.source)
 		voice.source.volume = 0.07
 
