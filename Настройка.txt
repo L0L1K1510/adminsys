@@ -1,8 +1,0 @@
-оптимально для linux (ubuntu/debian)
-необходимо установить:
-python3
-pip3
-discord.py (через pip3)
-youtube_dl (через pip3)
-ffmpeg
-screen
