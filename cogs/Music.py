@@ -62,14 +62,14 @@ class Music(commands.Cog):
 					self.queues.clear()
 					return
 				main_location = os.path.dirname(os.path.realpath(__file__))
-				song_path = os.path.abspath(os.path.realpath("Queue") + "//" + first_file)
+				song_path = os.path.abspath(os.path.realpath("Queue") + "/" + first_file)
 				if length != 0:
 					print("Песня закончена, проигрывается следующая в очереди\n")
 					print(f"Песен в очереди: {still_q}")
 					song_there = os.path.isfile("song.mp3")
 					if song_there:
 						os.remove("song.mp3")
-					shutil.move(song_path, main_location)
+					shutil.copy(song_path, main_location)
 					for file in os.listdir("./"):
 						if file.endswith(".mp3"):
 							os.rename(file, 'song.mp3')
