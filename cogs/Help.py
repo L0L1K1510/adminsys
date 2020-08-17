@@ -23,9 +23,9 @@ class Help(commands.Cog):
 
 		embed.set_author(name='Список ролей', icon_url=ctx.author.avatar_url)
 
-		embed.add_field(name='Местный', value='может быть получена на 10 уровне, лишает роли "Куда сдавать бутылки?".', inline=False)
-		embed.add_field(name='Сотка в кармане', value='может быть получена на 20 уровне, позволяет создавать и удалять каналы.', inline=False)
-		embed.add_field(name='Бро', value='может быть получена на 30 уровне, роль делает участника полноценным модератором.', inline=False)
+		embed.add_field(name='Бывалый', value='может быть получена на 10 уровне, лишает роли "Новичок".', inline=False)
+		embed.add_field(name='Местный', value='может быть получена на 20 уровне.', inline=False)
+		embed.add_field(name='Постоялец', value='может быть получена на 30 уровне.', inline=False)
 		embed.add_field(name='Внимание', value='запрещается флудить, с целью повышения уровня.', inline=False)
 
 		await ctx.send(embed=embed)
