@@ -7,7 +7,7 @@ class Help(commands.Cog):
 
 	@commands.command()
 	async def help(self, ctx):
-		embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='http://b92103ya.beget.tech/')
+		embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='https://vk.com/dsbotdevelop')
 
 		embed.set_author(name='Список команд', icon_url=ctx.author.avatar_url)
 
