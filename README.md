@@ -1,11 +1,39 @@
-# AdminSys
----
+# Universal Discord Bot / AdminSys
+
 ## RU
 ---
-### Подготовка
----
-Обязательно к установке: ffmpeg, python3, pip3, discord.py (через pip3), discord.py[voice] (через pip3), youtube-dl (через pip3).
-В файле `Levels_and_Games.py` настроить пути к файлам `.json`.
-После добавления бота на сервер, необходимо ввести команду `/init`. Затем настройте цвета и права созданных ролей по своему вкусу. 
 
-_Следить за разработкой_ <https://vk.com/dsbotdevelop>
+## Функционал
+
+* Администрирование сервера
+* Развлекательная система
+* Экономическая система
+* Воспроизведение музыки (YouTube, Spotify)
+
+Последние релизы:
+
+* <https://github.com/L0L1K1510/adminsys/releases/tag/0.0.2>
+* <https://github.com/L0L1K1510/adminsys/releases/tag/0.0.1>
+---
+
+## Установка
+
+Linux:
+
+* Загрузить `ffmpeg`, `python3`, `pip3`, `discord.py (через pip3)`, `discord.py[voice] (через pip3)`, `youtube-dl (через pip3)`
+* В файле `Levels_and_Games.py` настроить пути к файлам `.json`
+* После добавления бота на сервер, необходимо ввести команду `/init`
+* Настроить цвета и права созданных ролей по своему вкусу
+
+### Требования
+
+> * Ubuntu 16 и новее / CentOS 7 (на других ОС не тестировалось)
+> * Python 3 <https://www.python.org>
+> * FFmpeg <https://ffmpeg.org>
+---
+
+_Следить за разработкой:_ <https://vk.com/dsbotdevelop>
+_Связь с автором ВК:_ <https://vk.com/perrk>
+_Связь с автором Discord:_ L0L1K#9280
+
+_Предлагайте свои решения!_
