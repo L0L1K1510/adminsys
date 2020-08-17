@@ -38,27 +38,6 @@ async def echo(ctx, *, words: commands.clean_content):
 	await ctx.send(words)
 
 
-	
-	
-	
-#YT search
-@bot.command()
-async def youtube(ctx, *, search):
-
-	query_string = urllib.parse.urlencode({
-		'search_query': search
-	})
-	htm_content = urllib.request.urlopen('http://www.youtube.com/results?' + query_string)
-	search_results = re.findall('href=\"\\/watch\\?v=(.{11})', htm_content.read().decode())
-	await ctx.send('http://www.youtube.com/watch?v=' + search_results[0])
-
-@bot.Cog.listener()
-@youtube.error
-async def youtube_error(ctx, error):
-	if isinstance(error, commands.CheckFailure):
-		await ctx.send('***Вы не имеете права это использовать!***')
-	if isinstance(error, commands.MissingRequiredArgument):
-		await ctx.send('***Введите фразу, по которой вы хотите найти видео.***')
 		
 #Testembed
 @bot.command()
