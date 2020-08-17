@@ -134,7 +134,7 @@ class Music(commands.Cog):
 			c_path = os.path.dirname(os.path.realpath(__file__))
 			system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
 
-		for file in os.listdir("~/home/opc/adminsys/"):
+		for file in os.listdir("./"):
 			if file.endswith(".mp3"):
 				name = file
 				print(f"Переименован файл: {file}\n")
