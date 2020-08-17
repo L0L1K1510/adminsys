@@ -73,6 +73,8 @@ class Music(commands.Cog):
 					filename = os.path.basename(song_path)
 					dest = os.path.join(main_location,filename)
 					shutil.move(song_path, dest)
+					main_dir_list = os.listdir("./")
+					print(main_dir_list)
 					for file in os.listdir("./"):
 						if file.endswith(".mp3"):
 							os.rename(file, 'song.mp3')
