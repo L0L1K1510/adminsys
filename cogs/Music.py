@@ -62,7 +62,7 @@ class Music(commands.Cog):
 					self.queues.clear()
 					return
 				main_location = os.path.dirname(os.path.realpath(__file__))
-				song_path = os.path.abspath(os.path.realpath("Queue") + "//" + first_file)
+				song_path = os.path.abspath(os.path.realpath("Queue") + "/" + first_file)
 				if length != 0:
 					print("Песня закончена, проигрывается следующая в очереди\n")
 					print(f"Песен в очереди: {still_q}")
