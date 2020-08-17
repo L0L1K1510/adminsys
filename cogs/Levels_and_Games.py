@@ -90,19 +90,19 @@ class Levels(commands.Cog):
 			await ctx.send('***Пользователь не имеет никакого уровня.***')
 		else:
 			if self.users[member_id]['level'] >= 30:
-				role = discord.utils.get(member.guild.roles, name='Бро')
+				role = discord.utils.get(member.guild.roles, name='Постоялец')
 				await member.add_roles(role)
-				await ctx.send(f'{member}, достигший 30 уровня, получает роль Бро!')
+				await ctx.send(f'{member}, достигший 30 уровня, получает роль Постоялец!')
 			elif self.users[member_id]['level'] >= 20:
-				role = discord.utils.get(member.guild.roles, name='Сотка в кармане')
-				await member.add_roles(role)
-				await ctx.send(f'{member}, достигший 20 уровня, получает роль Сотка в кармане!')
-			elif self.users[member_id]['level'] >= 10:
 				role = discord.utils.get(member.guild.roles, name='Местный')
+				await member.add_roles(role)
+				await ctx.send(f'{member}, достигший 20 уровня, получает роль Местный!')
+			elif self.users[member_id]['level'] >= 10:
+				role = discord.utils.get(member.guild.roles, name='Бывалый')
 				r_role = discord.utils.get(member.guild.roles, name='Куда сдавать бутылки?')
 				await member.add_roles(role)
 				await member.remove_roles(r_role)
-				await ctx.send(f'{member}, достигший 10 уровня, получает роль Местный!')
+				await ctx.send(f'{member}, достигший 10 уровня, получает роль Бывалый!')
 			elif self.users[member_id]['level'] < 10:
 				await ctx.send('***Повышайте уровень, чтобы получать роли!***')
 
