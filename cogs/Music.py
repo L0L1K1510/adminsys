@@ -210,7 +210,7 @@ class Music(commands.Cog):
 				add_queue = False
 				self.queues[q_num] = q_num
 
-		queue_path = os.path.abspath(os.path.realpath("Queue") + f"\song{q_num}.%(ext)s")
+		queue_path = os.path.abspath(os.path.realpath("Queue") + f"/song{q_num}.%(ext)s")
 
 		ydl_opts = {
 			'format': 'bestaudio/best',
