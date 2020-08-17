@@ -10,7 +10,6 @@ class Music(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		
-	home_dir_bot = "~/home/opc/adminsys"
 
 	@commands.command(pass_context=True, aliases=['j', 'joi'])
 	async def join(self, ctx):
@@ -74,7 +73,7 @@ class Music(commands.Cog):
 					filename = os.path.basename(song_path)
 					dest = os.path.join(main_location,filename)
 					shutil.move(song_path, dest)
-					for file in os.listdir(home_dir_bot):
+					for file in os.listdir("~/home/opc/adminsys"):
 						if file.endswith(".mp3"):
 							os.rename(file, 'song.mp3')
 
@@ -135,7 +134,7 @@ class Music(commands.Cog):
 			c_path = os.path.dirname(os.path.realpath(__file__))
 			system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
 
-		for file in os.listdir(home_dir_bot):
+		for file in os.listdir("~/home/opc/adminsys"):
 			if file.endswith(".mp3"):
 				name = file
 				print(f"Переименован файл: {file}\n")
