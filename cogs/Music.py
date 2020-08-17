@@ -70,7 +70,7 @@ class Music(commands.Cog):
 					if song_there:
 						os.remove("song.mp3")
 					shutil.move(song_path, main_location)
-					for file in os.listdir("./Queue"):
+					for file in os.listdir("./"):
 						if file.endswith(".mp3"):
 							os.rename(file, 'song.mp3')
 
