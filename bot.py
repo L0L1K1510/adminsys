@@ -74,7 +74,7 @@ async def testembed(ctx):
 async def chng_pr():
 	await bot.wait_until_ready()
 
-	statuses = ['!help', 'http://b92103ya.beget.tech/']
+	statuses = ['!help', 'https://vk.com/dsbotdevelop']
 
 	while not bot.is_closed():
 		status = random.choice(statuses)
