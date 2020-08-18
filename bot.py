@@ -44,17 +44,6 @@ async def on_member_join(member):
 	role = discord.utils.get(member.guild.roles, name='Новичёк')
 	await member.add_roles(role)
 	
-#Antimat
-@bot.event
-async def on_message(message):
-	if message.author == bot.user:
-		return
-	else:
-		content = message.content.split()
-		for word in content:
-			if word in bad_words:
-				await message.delete()
-				await message.channel.send('***Цензура***')
 
 
 @bot.command(aliases=['say'])
