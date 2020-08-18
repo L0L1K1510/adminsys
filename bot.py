@@ -110,4 +110,4 @@ for cog in os.listdir(".//cogs"):
 
 
 bot.loop.create_task(chng_pr())
-bot.run('TOKEN')
+bot.run(TOKEN)
