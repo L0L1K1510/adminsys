@@ -14,8 +14,8 @@ class Remind(commands.Cog):
       date = msg_date + datetime.timedelta(hours = float(time))
       mf = msg_date + datetime.timedelta(hours = 3)  #костыли из-за часовых поясов
       md = date + datetime.timedelta(hours = 3)      #костыли из-за часовых поясов
-      await ctx.channel.send("Принято: сообщение \"{}\" будет отправлено {}.".format(text, md.strftime("%d.%m.%Y в %H:%M")))
-      self.bot.timer_manager.create_timer("reminder", date, args=(ctx.channel.id, mf.strftime("%d.%m.%Y %H:%M"), ctx.author, text))
+      await ctx.channel.send("Принято: сообщение \"{}\" будет отправлено {}.".format(text, md.strftime("%d.%m.%Y в %H:%M (МСК)")))
+      self.bot.timer_manager.create_timer("reminder", date, args=(ctx.channel.id, mf.strftime("%d.%m.%Y %H:%M (МСК)"), ctx.author, text))
 
     
   @bot.event
