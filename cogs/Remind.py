@@ -22,6 +22,14 @@ class Remind(commands.Cog):
 	async def on_reminder(self, channel_id, date, author, text):
 		channel = self.bot.get_channel(channel_id)
 		await channel.send("{}, твоё напоминание от {} : {}".format(author.mention, date, text))
+		
+	@commands.Cog.listener()
+	@remind.error
+	async def remind_error(self, ctx, error):
+		if isinstance(error, commands.MissingRequiredArgument):
+			await ctx.send('***Формат записи - !remind [число часов (поддерживаются дроби)] [напоминание]***')
+		if isinstance(error,commands.BadFrgument):
+			await ctx.send('***Формат записи - !remind [число часов (поддерживаются дроби)] [напоминание]***')
 
 
 def setup(bot):
