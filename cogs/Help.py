@@ -11,7 +11,7 @@ class Help(commands.Cog):
 
 		embed.set_author(name='Список команд', icon_url=ctx.author.avatar_url)
 
-		embed.add_field(name='Пользовательские', value='help, userinfo, roleinfo, diceinfo, giverole, diceup, dicedown, level, echo(say), roll, shop, buy(1,2,3,4), play(p), stop/pause/resume, queue(q), donate')
+		embed.add_field(name='Пользовательские', value='help, userinfo, roleinfo, diceinfo, giverole, diceup, dicedown, level, echo(say), remind, roll, shop, buy(1,2,3,4), play(p), stop/pause/resume, queue(q), donate')
 		embed.add_field(name='Модераторские', value='kick, clear, reload')
 		embed.add_field(name='Администраторские', value='ban, addmoney, addexp, addlvl')
 
