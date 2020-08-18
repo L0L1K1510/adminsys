@@ -49,7 +49,7 @@ _Предлагайте свои решения!_
 * Server moderation
 * Entertainment features
 * Local server currency
-* Music player (Yotube, Spotify links)
+* Music player (Youtube, Spotify links)
 
 Latest releases:
 
