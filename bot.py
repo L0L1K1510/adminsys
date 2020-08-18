@@ -55,7 +55,6 @@ async def on_message(message):
 			if word in bad_words:
 				await message.delete()
 				await message.channel.send('***Цензура***')
-	await bot.process.commands(message)
 
 
 @bot.command(aliases=['say'])
