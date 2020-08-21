@@ -20,7 +20,7 @@
 
 Linux:
 
-* Загрузить `ffmpeg`, `python3`, `pip3`, `discord.py (через pip3)`, `discord.py[voice] (через pip3)`, `youtube-dl (через pip3)`
+* Загрузить `ffmpeg`, `python3`, `pip3`, `discord.py (через pip3)`, `discord.py[voice] (через pip3)`, `discord-timers (через pip3)`, `youtube-dl (через pip3)`
 * В файле `Levels_and_Games.py` настроить пути к файлам `.json`
 * После добавления бота на сервер, необходимо ввести команду `/init`
 * Настроить цвета и права созданных ролей по своему вкусу
@@ -60,7 +60,7 @@ Latest releases:
 ## Installing
 Linux:
 
-* Download `ffmpeg`, `python3`, `pip3`, `discord.py (using pip3)`, `discord.py[voice] (using pip3)`, `youtube-dl (using pip3)`
+* Download `ffmpeg`, `python3`, `pip3`, `discord.py (using pip3)`, `discord.py[voice] (using pip3)`, `discord-timers (using pip3)`, `youtube-dl (using pip3)`
 * Manually set paths to `.json` files in `Levels_and_Games.py`
 * Type `/init` after adding the bot to Discord server
 * Set colours and permissions of new roles
