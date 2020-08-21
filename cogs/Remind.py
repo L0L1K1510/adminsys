@@ -6,9 +6,9 @@ from discord.ext import commands, timers
 
 class Remind(commands.Cog):
 	def __init__(self, bot):
-	self.bot = bot
+		self.bot = bot
+		
 	self.bot.timer_manager = timers.TimerManager(self.bot)
-	
 	UTC_time = 3
 	
 	@commands.command()
