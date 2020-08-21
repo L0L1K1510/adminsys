@@ -8,20 +8,13 @@ class Remind(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.bot.timer_manager = timers.TimerManager(self.bot)
-		
-	UTC_time = 3
-	
-	@commands.command()
-	async def remind(self, ctx, utime):
-		UTC_time = utime
-		return UTC_time
 
 	@commands.command()
 	async def remind(self, ctx, time, *, text):
 		msg_date = ctx.message.created_at
 		date = msg_date + datetime.timedelta(hours = float(time))
-		mf = msg_date + datetime.timedelta(hours = UTC_time)  #костыли из-за часовых поясов
-		md = date + datetime.timedelta(hours = UTC_time)      #костыли из-за часовых поясов
+		mf = msg_date + datetime.timedelta(hours = 3)  #костыли из-за часовых поясов
+		md = date + datetime.timedelta(hours = 3)      #костыли из-за часовых поясов
 		await ctx.channel.send("Принято: сообщение \"{}\" будет отправлено {}.".format(text, md.strftime("%d.%m.%Y в %H:%M")))
 		self.bot.timer_manager.create_timer("reminder", date, args=(ctx.channel.id, mf.strftime("%d.%m.%Y %H:%M"), ctx.author, text))
 
