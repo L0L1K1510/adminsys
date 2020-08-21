@@ -11,8 +11,8 @@ class Search(commands.Cog):
 	@commands.command()
 	async def search(self, ctx, *, text):
 		command = text
-		ctx.send('Google: https://google.com/?#q=' + command)
-		ctx.send('Youtube: https://www.youtube.com/results?search_query=' + command)
+		await ctx.send('Google: https://google.com/?#q=' + command)
+		await ctx.send('Youtube: https://www.youtube.com/results?search_query=' + command)
 
 def setup(bot):
 	bot.add_cog(Search(bot))
