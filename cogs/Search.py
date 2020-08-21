@@ -9,9 +9,8 @@ class Search(commands.Cog):
 
 
 	@commands.command()
-	async def search(self, ctx, *, text):
+	async def ytsearch(self, ctx, *, text):
 		command = text.replace(" ", "+")
-		await ctx.send('Google: https://google.com/?#q=' + command)
 		await ctx.send('Youtube: https://www.youtube.com/results?search_query=' + command)
 
 def setup(bot):
