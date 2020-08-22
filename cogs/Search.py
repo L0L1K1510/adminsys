@@ -1,5 +1,7 @@
 import discord
 import asyncio
+import pprint
+import json
 from discord.ext import commands
 
 import urllib, re
@@ -18,6 +20,8 @@ class Search(commands.Cog):
 		print(content.read().decode())
 		print(content)
 		print(url)
+		j_res = json.loads(content.read())
+		pprint.pprint(j_res)
 		result = re.findall(r'v', content.read().decode())
 		#for res in result:
 			#res = res[9: ]
