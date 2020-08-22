@@ -2,7 +2,7 @@ import discord
 import datetime
 import asyncio
 from discord.ext import commands, timers
-
+TIMEZONE = 3 # set timezone "UTC +value"
 
 class Remind(commands.Cog):
 	def __init__(self, bot):
@@ -13,8 +13,8 @@ class Remind(commands.Cog):
 	async def remind(self, ctx, time, *, text):
 		msg_date = ctx.message.created_at
 		date = msg_date + datetime.timedelta(hours = float(time))
-		mf = msg_date + datetime.timedelta(hours = 3)  #костыли из-за часовых поясов
-		md = date + datetime.timedelta(hours = 3)      #костыли из-за часовых поясов
+		mf = msg_date + datetime.timedelta(TIMEZONE = 3)
+		md = date + datetime.timedelta(TIMEZONE = 3)
 		await ctx.channel.send("Принято: сообщение \"{}\" будет отправлено {}.".format(text, md.strftime("%d.%m.%Y в %H:%M")))
 		self.bot.timer_manager.create_timer("reminder", date, args=(ctx.channel.id, mf.strftime("%d.%m.%Y %H:%M"), ctx.author, text))
 
