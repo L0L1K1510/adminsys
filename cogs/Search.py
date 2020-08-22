@@ -1,7 +1,5 @@
 import discord
 import asyncio
-import pprint
-import json
 from discord.ext import commands
 
 import urllib, re
