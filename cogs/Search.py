@@ -18,7 +18,7 @@ class Search(commands.Cog):
 		content = urllib.request.urlopen(url)
 		print(content.read().decode())
 		f = open('result.txt', 'w')
-		f.write(content.read().decode())
+		f.write(str(content.read().decode()))
 		f.close()
 		
 		f = open("result.txt", "r", encoding="utf-8").read()
