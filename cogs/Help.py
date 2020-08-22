@@ -17,7 +17,7 @@ class Help(commands.Cog):
 			options.append(await channel.send("Опция 1 : {} {}".format(i + 1, "test" + str(i + 1))))
 			await options[i].add_reaction(emoji=emoji_list[i])  #
 
-		    def check(reaction, user):
+		def check(reaction, user):
         		option = 0
         		if reaction.emoji == '1⃣':
             			option = 1
