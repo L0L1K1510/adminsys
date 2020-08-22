@@ -22,7 +22,7 @@ class Search(commands.Cog):
 		print(url)
 		j_res = json.loads(content.read())
 		pprint.pprint(j_res)
-		result = re.findall(r'v', content.read().decode())
+		result = re.findall(r'videoId\":\"[a-zA-Z0-9]+', content.read().decode())
 		#for res in result:
 			#res = res[9: ]
 		print(result)
