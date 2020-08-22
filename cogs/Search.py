@@ -15,7 +15,7 @@ class Search(commands.Cog):
 		url = "https://www.youtube.com/results?" + \
 		urllib.parse.urlencode({'search_query':text.replace(' ', '+')});
 		content = urllib.request.urlopen(url)
-		print(content)
+		print(content.read().decode())
 		result = re.findall('href=\"\\/watch\\?v=(.{11})', content.read().decode())
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
 
