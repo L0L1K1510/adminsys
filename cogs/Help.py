@@ -17,8 +17,15 @@ class Help(commands.Cog):
 			options.append(await channel.send("Опция 1 : {} {}".format(i + 1, "test" + str(i + 1))))
 			await options[i].add_reaction(emoji=emoji_list[i])  #
 
-		def check(reaction, user):
-			return str(reaction.emoji) in emoji_list and user == author and reaction.message.id == options[option-1].id
+		    def check(reaction, user):
+        		option = 0
+        		if reaction.emoji == '1⃣':
+            			option = 1
+        		elif str(reaction.emoji) == '2⃣':
+           			option = 2
+        		elif str(reaction.emoji) == '3⃣':
+            			option = 3
+        		return user == author and option != 0 and reaction.message.id == options[option-1].id
 		
 		try:
 			reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
