@@ -16,11 +16,17 @@ class Search(commands.Cog):
 		urllib.parse.urlencode({'search_query':text.replace(' ', '+')});
 		content = urllib.request.urlopen(url)
 		print(content.read().decode())
-		result = re.findall(r'videoId\":\"[a-zA-Z0-9]+', str(content.read().decode()))
+		f = open('result.txt', 'w')
+		f.write(content.read().decode())
+		f.close()
+		
+		f = open('result.txt', 'r')
+		result = re.findall(r'videoId\":\"[a-zA-Z0-9]+', f)
 		#for res in result:
 			#res = res[9: ]
 		print(result)
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
+		f.close()
 
 def setup(bot):
 	bot.add_cog(Search(bot))
