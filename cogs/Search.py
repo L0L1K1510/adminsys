@@ -21,7 +21,7 @@ class Search(commands.Cog):
 		f.close()
 		
 		f = open('result.txt', 'r')
-		result = re.findall('videoId\":\"[a-zA-Z0-9]+', f)
+		result = re.findall('videoId\":\"[a-zA-Z0-9]+', f.read())
 		#for res in result:
 			#res = res[9: ]
 		print(result)
