@@ -16,7 +16,7 @@ class Search(commands.Cog):
 	@commands.command()
 	async def ggsearch(self, ctx, *, text):
 		url = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&" + \
-		urllib.urlencode({'q':query});
+		urllib.parse.urlencode({'q':query});
 		referer = "http://wikipedia.org"
 		h = httplib2.Http({})
 		resp, content = h.request(url, "GET", headers={'Referer': referer})
