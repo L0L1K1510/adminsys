@@ -50,7 +50,6 @@ class Help(commands.Cog):
 
 			elif str(reaction.emoji) == emoji_list[1]:
 				# сюда help2
-
 			else:
 				# сюда help3
 
