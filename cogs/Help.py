@@ -25,7 +25,28 @@ class Help(commands.Cog):
 			await channel.send('{.mention} ничего не выбрал(')
 	    	else:
 			if str(reaction.emoji) == emoji_list[0]:
-				# сюда help1
+				embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='https://vk.com/dsbotdevelop')
+
+				embed.set_author(name='Список общих команд', icon_url=ctx.author.avatar_url)
+
+				embed.add_field(name='Пользовательские', value='help, userinfo, roleinfo, diceinfo, giverole, diceup, dicedown, level, echo(say), remind, roll, shop, buy(1,2,3,4), play(p), stop/pause/resume, queue(q), donate')
+				embed.add_field(name='!help', value='Список команд')
+				embed.add_field(name='!userinfo [@User]', value='Информация о пользователе')
+				embed.add_field(name='!roleinfo', value='Информация о ролях')
+				embed.add_field(name='!giverole', value='Получить роль за уровень')
+				embed.add_field(name='!diceinfo', value='Информация об игре Dice')
+				embed.add_field(name='!level [@User]', value='Узнать уровень и опыт игрока')
+				embed.add_field(name='!echo(say) [text]', value='Бот повторит текст, который будет введён')
+				embed.add_field(name='!remind [time] [text]', value='Напоминание')
+				embed.add_field(name='!roll', value='Случайное число')
+				embed.add_field(name='!shop', value='Магазин')
+				embed.add_field(name='!buy [1,2,3,4]', value='Купить роль из магазина')
+				embed.add_field(name='!join', value='Пригласить бота в голосовой чат')
+				embed.add_field(name='!play [link]', value='Запустить музыку')
+				embed.add_field(name='!stop/pause/resume', value='Остановка/пауза/продолжение музыки')
+				embed.add_field(name='!queue [link]', value='Добавить песню в плейлист')
+				embed.add_field(name='!leave', value='Выгнать бота из голосового чата')
+				
 
 			elif str(reaction.emoji) == emoji_list[1]:
 				# сюда help2
