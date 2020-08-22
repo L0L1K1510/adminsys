@@ -18,7 +18,7 @@ class Search(commands.Cog):
 		print(content.read().decode())
 		print(content)
 		print(url)
-		result = re.findall(r'v', str(content.read().decode()))
+		result = re.findall(r'v', content.read().decode())
 		#for res in result:
 			#res = res[9: ]
 		print(result)
