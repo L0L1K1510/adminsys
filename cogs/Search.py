@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import json
 from discord.ext import commands
 
 import urllib, re
@@ -20,13 +21,15 @@ class Search(commands.Cog):
 		f.write(content.read().decode())
 		f.close()
 		
-		f = open('result.txt', 'r')
-		result = re.findall(r'videoId\":\"...........', f.read())
+		f = open("result.txt", "r", encoding="utf-8").read()
+		js = f.split("\n")[0].split("=", 1)[1][:-1]
+		j_res = json.loads(js)
+		f.close()
+		result = re.findall(r'videoId\":\"...........', j_res)
 		for res in result:
 			res = res[9: ]
 		print(result)
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
-		f.close()
 
 def setup(bot):
 	bot.add_cog(Search(bot))
