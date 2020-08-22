@@ -1,4 +1,5 @@
 import discord
+import asyncio
 from discord.ext import commands
 
 class Help(commands.Cog):
@@ -20,7 +21,7 @@ class Help(commands.Cog):
 			return str(reaction.emoji) in emoji_list and user == author and reaction.message.id == options[option-1].id
 		
 		try:
-			reaction, user = await bot.wait_for('reaction_add', timeout=30.0, check=check)
+			reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
 		except asyncio.TimeoutError:
 			await channel.send('{.mention} ничего не выбрал(')
 		else:
