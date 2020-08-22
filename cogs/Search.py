@@ -16,9 +16,9 @@ class Search(commands.Cog):
 		urllib.parse.urlencode({'search_query':text.replace(' ', '+')});
 		content = urllib.request.urlopen(url)
 		print(content.read())
-		result = re.findall(r'v', str(content.read()))
-		for res in result:
-			res = res[9: ]
+		result = re.findall(r'v', str(content.read().decode()))
+		#for res in result:
+			#res = res[9: ]
 		print(result)
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
 
