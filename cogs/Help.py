@@ -6,7 +6,37 @@ class Help(commands.Cog):
 		self.bot = bot
 
 	@commands.command()
-	async def help(self, ctx):
+	async def help(self, ctx):	
+		emoji_list = ['1⃣','2⃣','3⃣']
+	        channel, author = ctx.channel, ctx.author
+	    	title_msg = await channel.send("Title".format("Title"))  # title
+
+	        options = []
+	    	for i in range(3):  #
+		    	options.append(await channel.send("Опция 1 : {} {}".format(i + 1, "test" + str(i + 1))))
+		    	await options[i].add_reaction(emoji=emoji_list[i])  #
+
+	    	def check(reaction, user):
+			return str(reaction.emoji) in emoji_list and user == author and reaction.message.id == options[option-1].id
+		
+	    	try:
+			reaction, user = await bot.wait_for('reaction_add', timeout=30.0, check=check)
+	    	except asyncio.TimeoutError:
+			await channel.send('{.mention} ничего не выбрал(')
+	    	else:
+			if str(reaction.emoji) == emoji_list[0]:
+				# сюда help1
+
+			elif str(reaction.emoji) == emoji_list[1]:
+				# сюда help2
+
+			else:
+				# сюда help3
+
+			
+
+		
+		# old
 		embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='https://vk.com/dsbotdevelop')
 
 		embed.set_author(name='Список команд', icon_url=ctx.author.avatar_url)
