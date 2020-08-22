@@ -16,7 +16,7 @@ class Search(commands.Cog):
 		urllib.parse.urlencode({'search_query':text.replace(' ', '+')});
 		content = urllib.request.urlopen(url)
 		print(content.read())
-		result = re.findall(r'videoId\":\"...........', str(content.read()))
+		result = re.findall(r'v', str(content.read()))
 		for res in result:
 			res = res[9: ]
 		print(result)
