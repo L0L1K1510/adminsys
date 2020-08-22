@@ -24,7 +24,7 @@ Linux:
 * В файле `Levels_and_Games.py` настроить пути к файлам `.json`
 * После добавления бота на сервер, необходимо ввести команду `/init`
 * Настроить цвета и права созданных ролей по своему вкусу
-* Настроить часовой пояс в файле Remind.py (16 и 17 строки)
+* Настроить часовой пояс в файле Remind.py (строка 5)
 
 ### Требования
 
@@ -65,6 +65,7 @@ Linux:
 * Manually set paths to `.json` files in `Levels_and_Games.py`
 * Type `/init` after adding the bot to Discord server
 * Set colours and permissions of new roles
+* Set timezone for Remind.py (5th line)
 
 ### Requirements
 
