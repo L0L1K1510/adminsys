@@ -13,7 +13,7 @@ class Search(commands.Cog):
 	@commands.command()
 	async def ytsearch(self, ctx, *, text):
 		url = "https://www.youtube.com/results?" + \
-		urllib.parse.urlencode({'search_query':text});
+		urllib.parse.urlencode({'search_query':text.replace(' ', '+')});
 		content = urllib.request.urlopen(url)
 		result = re.findall('href=\"\\/watch\\?v=(.{11})', content.read().decode())
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
