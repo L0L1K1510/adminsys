@@ -8,22 +8,22 @@ class Help(commands.Cog):
 	@commands.command()
 	async def help(self, ctx):	
 		emoji_list = ['1⃣','2⃣','3⃣']
-	        channel, author = ctx.channel, ctx.author
-	    	title_msg = await channel.send("Title".format("Title"))  # title
+		channel, author = ctx.channel, ctx.author
+		title_msg = await channel.send("Title".format("Title"))  # title
 
-	        options = []
-	    	for i in range(3):  #
-		    	options.append(await channel.send("Опция 1 : {} {}".format(i + 1, "test" + str(i + 1))))
-		    	await options[i].add_reaction(emoji=emoji_list[i])  #
+		options = []
+		for i in range(3):
+			options.append(await channel.send("Опция 1 : {} {}".format(i + 1, "test" + str(i + 1))))
+			await options[i].add_reaction(emoji=emoji_list[i])  #
 
-	    	def check(reaction, user):
+		def check(reaction, user):
 			return str(reaction.emoji) in emoji_list and user == author and reaction.message.id == options[option-1].id
 		
-	    	try:
+		try:
 			reaction, user = await bot.wait_for('reaction_add', timeout=30.0, check=check)
-	    	except asyncio.TimeoutError:
+		except asyncio.TimeoutError:
 			await channel.send('{.mention} ничего не выбрал(')
-	    	else:
+		else:
 			if str(reaction.emoji) == emoji_list[0]:
 				embed = discord.Embed(title='Помощь', description='Список команд', colour=discord.Color.red(), url='https://vk.com/dsbotdevelop')
 
