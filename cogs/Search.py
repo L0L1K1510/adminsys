@@ -19,6 +19,7 @@ class Search(commands.Cog):
 		result = re.findall(r'videoId\":\"...........', content.read().decode())
 		for res in result:
 			res = res[9: ]
+		print(result)
 		await ctx.send('https://www.youtube.com/watch?v=' + result[0])
 
 def setup(bot):
