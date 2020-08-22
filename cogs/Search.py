@@ -2,10 +2,7 @@ import discord
 import asyncio
 from discord.ext import commands
 
-import urllib
-import pprint
-import json
-import httplib2
+import urllib, re
 
 class Search(commands.Cog):
 	
